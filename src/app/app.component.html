@@ -1,0 +1,10 @@
+<mat-toolbar role="header">
+  <b>TODOVERKILL</b>
+</mat-toolbar>
+
+<div>
+  <mat-spinner *ngIf="(isLoading | async) === true" color="primary"></mat-spinner>
+  <ul *ngIf="(isLoaded | async) === true">
+    <li *ngFor="let todo of todos | async">{{todo}}</li>
+  </ul>
+</div>

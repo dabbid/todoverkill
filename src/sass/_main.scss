@@ -1,0 +1,41 @@
+body {
+  background-color: $color-white;
+  color: $color-black;
+  font-family: $font-text;
+  font-size: $font-size-mobile;
+  font-weight: $font-weight-regular;
+  line-height: $lh-dflt;
+
+  @media screen and (min-width: $screen-tablet-portrait) {
+    font-size: $font-size-desktop;
+  }
+}
+
+b,
+strong,
+.bold {
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+h4,
+.h1-like,
+.h2-like,
+.h3-like,
+.h4-like {
+  font-family: $font-title;
+}
+
+h1,
+.h1-like { font-size: 2rem; }
+
+h2,
+.h2-like { font-size: 1.375rem; }
+
+h3,
+.h3-like { font-size: 1.25rem; }
+
+h4,
+.h4-like { font-size: 1.125rem; }

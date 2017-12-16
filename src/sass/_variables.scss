@@ -1,0 +1,124 @@
+// ANIMATION EASES
+$ease-dflt: cubic-bezier(.4, 0, .2, 1);
+$animation-duration-dflt: .3s;
+
+// COLORS
+$color-white:      #fff;
+$color-black:      #333;
+
+$colors: (
+  'white':      $color-white,
+  'black':      $color-black,
+);
+
+// CONTAINER SIZES
+$container-width: 1140px;
+
+// DISPLAYS
+$displays: ('block', 'flex', 'inline', 'inline-block');
+
+// FONT FAMILY
+$font-text:  'Open Sans', Helvetica, sans-serif;
+$font-title: 'Roboto Slab', Helvetica, sans-serif;
+
+// FONT SIZES
+$font-xxl:          4rem;
+$font-xl:           3rem;
+$font-l:            2.25rem;
+$font-ml:           2rem;
+$font-m:            1.5rem;
+$font-ms:           1.25rem;
+$font-r:            1rem;
+$font-sm:           .875rem;
+$font-s:            .75rem;
+$font-xs:           .625rem;
+$font-xxs:          .5rem;
+
+$font-size-desktop: 16px;
+$font-size-mobile:  14px;
+
+$font-sizes: (
+  xxl: $font-xxl,
+  xl: $font-xl,
+  l: $font-l,
+  ml: $font-ml,
+  m: $font-m,
+  ms: $font-ms,
+  r: $font-r,
+  sm: $font-sm,
+  s: $font-s,
+  xs: $font-xs,
+  xxs: $font-xxs
+);
+
+// FONT WEIGHTS
+$font-weight-black:   900;
+$font-weight-bold:    700;
+$font-weight-medium:  500;
+$font-weight-med:     500;
+$font-weight-mid:     500;
+$font-weight-regular: 400;
+$font-weight-reg:     400;
+$font-weight-light:   300;
+$font-weight-lite:    300;
+$font-weight-thin:    300;
+$font-weight-xlight:  200;
+$font-weight-xlite:   200;
+$font-weight-xthin:   200;
+
+// LINE HEIGHTS
+$lh-dflt: 1.5;
+
+// SCREEN SIZES
+$screen-mobile-s-portait:   320px;
+$screen-mobile-m-portait:   360px;
+$screen-mobile-s-landscape: 568px;
+$screen-phablet-portrait:   600px;
+$screen-mobile-m-landscape: 640px;
+$screen-tablet-portrait:    768px;
+$screen-phablet-landscape:  800px;
+$screen-tablet-landscape:   1024px;
+$screen-laptop:             1366px;
+$screen-desktop:            1920px;
+
+$screen-sizes: (
+  'mobile-s-portait': $screen-mobile-s-portait,
+  'mobile-m-portait': $screen-mobile-m-portait,
+  'mobile-s-landscape': $screen-mobile-s-landscape,
+  'phablet-portrait': $screen-phablet-portrait,
+  'mobile-m-landscape': $screen-mobile-m-landscape,
+  'tablet-portrait': $screen-tablet-portrait,
+  'phablet-landscape': $screen-phablet-landscape,
+  'tablet-landscape': $screen-tablet-landscape,
+  'laptop': $screen-laptop,
+  'desktop': $screen-desktop
+);
+
+// SPACES
+$space-xxl: 9.25rem;
+$space-xl:  6.25rem;
+$space-l:   4.375rem;
+$space-ml:  3rem;
+$space-m:   2.25rem;
+$space-ms:  1.75rem;
+$space-sl:  1.25rem;
+$space-sm:  1rem;
+$space-s:   .875rem;
+$space-xs:  .5rem;
+$space-xxs: .375rem;
+$space-0:   0;
+
+$spaces: (
+  xxl: $space-xxl,
+  xl: $space-xl,
+  l: $space-l,
+  ml: $space-ml,
+  m: $space-m,
+  ms: $space-ms,
+  sl: $space-sl,
+  sm: $space-sm,
+  s: $space-s,
+  xs: $space-xs,
+  xxs: $space-xxs,
+  '0': $space-0
+);
