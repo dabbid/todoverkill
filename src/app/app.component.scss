@@ -1,0 +1,12 @@
+@import '~sass/variables';
+@import '~sass/mixins';
+
+.main-header {
+  position: relative;
+  width: 100%;
+}
+
+.main-header-back-btn {
+  @include absolute-center(0, auto, 0, 0);
+  position: absolute;
+}

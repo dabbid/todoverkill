@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
-
-import { LoadTodosAction } from './list/rx/list.actions';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,17 +10,13 @@ import { LoadTodosAction } from './list/rx/list.actions';
 
 export class AppComponent {
 
-  todos: Observable<Array<any>>;
-  isLoading: Observable<boolean>;
-  isLoaded: Observable<boolean>;
+  shouldDisplayBackButton:boolean = false;
 
-  constructor(private store:Store<any>) {
-    this.isLoading = store.select('list').select('listLoading');
-    this.isLoaded = store.select('list').select('listLoaded');
-    this.todos = store.select('list').select('list');
-  }
-
-  ngOnInit() {
-    this.store.dispatch(new LoadTodosAction());
+  constructor(private router:Router) {
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd ) {
+        this.shouldDisplayBackButton = !router.isActive('/todos', true);
+      }
+    });
   }
 }

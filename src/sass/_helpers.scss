@@ -1,0 +1,288 @@
+// ALIGNMENT
+.absolute-center {
+  @include absolute-center;
+}
+
+.absolute-center-tr {
+  @include absolute-center-tr;
+}
+
+.hcenter {
+  @include hcenter;
+}
+
+.vcenter-child {
+  @include vcenter-child;
+}
+
+.float-left { float: left; }
+.float-right { float: right; }
+
+// BORDERS
+.bordered { border: 1px solid; }
+.bordered-bottom { border-bottom: 1px solid; }
+.bordered-left { border-left: 1px solid; }
+.bordered-right { border-right: 1px solid; }
+.bordered-top { border-top: 1px solid; }
+
+.bordered-h {
+  border-left: 1px solid;
+  border-right: 1px solid;
+}
+.bordered-v {
+  border-bottom: 1px solid;
+  border-top: 1px solid;
+}
+
+// BORDERS RADIUS
+@for $i from 1 through 10 {
+  .border-radius-#{$i},
+  .bradius-#{$i} { border-radius: 1px * $i; }
+}
+
+// BUSY
+.busy {
+  position: relative;
+
+  &::before {
+    background-color: rgba($color-white, .9);
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
+  &::after {
+    @include absolute-center
+    color: $color-black;
+    content: 'refresh';
+    font-size: 3rem;
+    height: 3rem;
+    width: 3rem;
+    z-index: 2;
+  }
+}
+
+// CLEARFIX
+.clearfix {
+  @include clearfix;
+}
+
+// COLORS (background, border, text)
+@each $key, $value in $colors {
+  .bg-color-#{$key} { background-color: $value; }
+  .border-color-#{$key} { border-color: $value; }
+  .text-color-#{$key} { color: $value; }
+}
+
+// CONTAINER
+.container {
+  @include container;
+}
+
+// DISPLAY
+.block { display: block; }
+.flex { display: flex; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
+
+.hide {
+  display: none !important;
+}
+
+@each $key, $value in $screen-sizes {
+  @each $display in $displays {
+    @media screen and (min-width: #{$value}) {
+      .#{$display}-#{$key} { display: #{$display} !important; }
+    }
+  }
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+// FONT FAMILIES
+.font-text { font-family: $font-text; }
+.font-title { font-family: $font-title; }
+
+// FONT SIZES
+@each $key, $value in $font-sizes {
+  .font-#{$key} {
+    font-size: $value;
+  }
+}
+
+// FONT STYLES
+.font-italic { font-style: italic; }
+.font-norm { font-style: normal; }
+
+// LIST
+.list-reset {
+  @include list-reset;
+}
+
+.list-plain {
+  @include list-plain;
+}
+
+.list-plain-auto {
+  @include list-plain;
+  li {
+    flex-grow: 0;
+  }
+}
+
+// SPACES
+$margins: (
+  mt: margin-top,
+  mr: margin-right,
+  mb: margin-bottom,
+  ml: margin-left
+);
+
+$paddings: (
+  pt: padding-top,
+  pr: padding-right,
+  pb: padding-bottom,
+  pl: padding-left
+);
+
+@each $key, $value in $spaces {
+  @each $class-prefix, $property in $margins {
+    .#{$class-prefix}-#{$key} { #{$property}: $value; }
+
+    .#{$class-prefix}-#{$key}-i { #{$property}: $value !important; }
+  }
+
+  .mh-#{$key} {
+    margin-left: $value;
+    margin-right: $value;
+  }
+
+  .mh-#{$key}-i {
+    margin-left: $value !important;
+    margin-right: $value !important;
+  }
+
+  .mv-#{$key} {
+    margin-bottom: $value;
+    margin-top: $value;
+  }
+
+  .mv-#{$key}-i {
+    margin-bottom: $value !important;
+    margin-top: $value !important;
+  }
+
+  .ma-#{$key} { margin: $value; }
+
+  .ma-#{$key}-i { margin: $value !important; }
+}
+
+@each $key, $value in $spaces {
+  @each $class-prefix, $property in $paddings {
+    .#{$class-prefix}-#{$key} { #{$property}: $value; }
+
+    .#{$class-prefix}-#{$key}-i { #{$property}: $value !important; }
+  }
+
+  .ph-#{$key} {
+    padding-left: $value;
+    padding-right: $value;
+  }
+
+  .ph-#{$key}-i {
+    padding-left: $value !important;
+    padding-right: $value !important;
+  }
+
+  .pv-#{$key} {
+    padding-bottom: $value;
+    padding-top: $value;
+  }
+
+  .pv-#{$key}-i {
+    padding-bottom: $value !important;
+    padding-top: $value !important;
+  }
+
+  .pa-#{$key} { padding: $value; }
+
+  .pa-#{$key}-i { padding: $value !important; }
+}
+
+// TEXT
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.uc,
+.uppercase { text-transform: uppercase; }
+
+.ucfirst::first-letter,
+.upperfirst::first-letter { text-transform: uppercase; }
+
+.text-ellipsis,
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-no-decoration { text-decoration: none; }
+.text-stroke { text-decoration: line-through; }
+.text-underline { text-decoration: underline; }
+
+// line clamp
+$line-clamp-max: 10;
+
+[class*="line-clamp"] {
+  overflow: hidden;
+  position: relative;
+
+  &::after {
+    box-shadow: -8rem 0 4rem -4rem $color-white inset; // prefer box-shadow over gradient as box-shadow can be animated
+    bottom: 0;
+    content: '';
+    height: $lh-dflt * 1rem;
+    position: absolute;
+    right: 0;
+    width: 8rem;
+  }
+}
+
+@for $i from 1 through $line-clamp-max {
+  .line-clamp-#{$i} {
+    height: $lh-dflt * $i * 1em;
+  }
+}
+
+@each $key, $value in $screen-sizes {
+  @media screen and (min-width: $value) {
+    @for $i from 1 through $line-clamp-max {
+      .line-clamp-#{$i}-#{$key} {
+        height: $lh-dflt * $i * 1em;
+      }
+    }
+  }
+}
+
+// VIDEO
+.video-wrapper {
+  height: 0;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  position: relative;
+
+  iframe {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}

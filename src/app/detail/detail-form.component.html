@@ -1,0 +1,9 @@
+<div>
+  <h1>{{data.title}}</h1>
+  <ul>
+    <li>Status: {{ data.completed ? 'Completed' : 'Pending' }}</li>
+    <li>Created on {{data.created_at | date}}</li>
+    <li *ngIf="data.modified_at">Modified on {{data.created_at | date}}</li>
+  </ul>
+  <p *ngIf="data.description">{{data.description}}</p>
+</div>

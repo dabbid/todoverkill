@@ -1,10 +1,12 @@
 <mat-toolbar role="header">
-  <b>TODOVERKILL</b>
+  <div class="main-header text-center" >
+    <a *ngIf="shouldDisplayBackButton" class="main-header-back-btn" mat-icon-button routerLink="/todos">
+      <mat-icon>chevron_left</mat-icon>
+    </a>
+    TODOVERKILL
+  </div>
 </mat-toolbar>
 
-<div>
-  <mat-spinner *ngIf="(isLoading | async) === true" color="primary"></mat-spinner>
-  <ul *ngIf="(isLoaded | async) === true">
-    <li *ngFor="let todo of todos | async">{{todo}}</li>
-  </ul>
+<div class="container">
+  <router-outlet></router-outlet>
 </div>
