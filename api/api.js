@@ -4,6 +4,8 @@ var router = express.Router();
 
 var dataFilePath = './api/data.json';
 
+var uid = 4;
+
 router.get('/todos', function(req, res, next) {
   jsonfile.readFile(dataFilePath, function(err, json) {
     res.send(json);
@@ -19,6 +21,18 @@ router.get('/todos/:id', function(req, res, next) {
       res.send(requestedTodo);
     });
   }
+});
+
+router.post('/todos', function(req, res, next) {
+  const todo = Object.assign({
+    created_at: new Date().toISOString(),
+    id: uid++,
+  }, req.body);
+  jsonfile.writeFile(dataFilePath, todo, { flag: 'a' }, function(err) {
+    if (!err) {
+      res.send(todo);
+    }
+  });
 });
 
 router.put('/todos/:id', function(req, res, next) {
