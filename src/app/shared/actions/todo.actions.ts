@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import Todo from '../models/todo.model';
-import { TODO_LOADING, TODO_LOADED, TODO_UPDATING, TODO_UPDATED } from './todo.types';
+import { TODO_LOADING, TODO_LOADED, TODO_UPDATING, TODO_UPDATED, RESET_TODO_UPDATED_STATE } from './todo.types';
 
 interface CreatedTodo {
   description?:string;
@@ -40,9 +40,14 @@ export class TodoUpdatedAction implements Action {
   constructor(public payload:Todo) {}
 }
 
+export class ResetTodoUpdatedStateAction implements Action {
+  readonly type = RESET_TODO_UPDATED_STATE;
+}
+
 export type All
   = LoadTodoAction
   | TodoLoadedAction
   | UpdateTodoAction
   | TodoUpdatedAction
+  | ResetTodoUpdatedStateAction
 ;

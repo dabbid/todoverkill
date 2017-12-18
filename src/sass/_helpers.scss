@@ -111,7 +111,7 @@
 
 // FONT SIZES
 @each $key, $value in $font-sizes {
-  .font-#{$key} {
+  .font-size-#{$key} {
     font-size: $value;
   }
 }

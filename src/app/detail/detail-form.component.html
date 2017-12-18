@@ -1,9 +1,35 @@
-<div>
-  <h1>{{data.title}}</h1>
-  <ul>
-    <li>Status: {{ data.completed ? 'Completed' : 'Pending' }}</li>
+<form [formGroup]="form">
+  <mat-form-field class="field">
+    <input
+      [(ngModel)]="data.title"
+      (blur)="onBlur('title')"
+      class="field-title"
+      formControlName="title"
+      matInput
+      placeholder="Title"
+      required
+    >
+  </mat-form-field>
+  <ul class="list-reset mv-m">
     <li>Created on {{data.created_at | date}}</li>
-    <li *ngIf="data.modified_at">Modified on {{data.created_at | date}}</li>
+    <li *ngIf="data.modified_at">Modified on {{data.modified_at | date}}</li>
+    <li>
+      Status:
+      <mat-form-field class="ml-xs">
+        <mat-select [(ngModel)]="data.completed" (change)="onStateChange()" formControlName="state" required>
+          <mat-option [value]="false">Pending</mat-option>
+          <mat-option [value]="true">Completed</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </li>
   </ul>
-  <p *ngIf="data.description">{{data.description}}</p>
-</div>
+  <mat-form-field class="field">
+    <textarea
+      [(ngModel)]="data.description"
+      (blur)="onBlur('description')"
+      formControlName="description"
+      matInput
+      placeholder="Description"
+    ></textarea>
+  </mat-form-field>
+</form>

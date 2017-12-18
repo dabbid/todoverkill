@@ -1,4 +1,4 @@
-import { TODO_LOADED, TODO_LOADING, TODO_UPDATED, TODO_UPDATING } from '../actions/todo.types';
+import { TODO_LOADED, TODO_LOADING, TODO_UPDATED, TODO_UPDATING, RESET_TODO_UPDATED_STATE } from '../actions/todo.types';
 import * as actions from '../actions/todo.actions';
 
 export type Action = actions.All;
@@ -59,6 +59,12 @@ export default function detailReducer(state = initialState, action: Action) {
         data,
         updated: true,
         updating: false,
+      };
+
+    case RESET_TODO_UPDATED_STATE:
+      return {
+        ...state,
+        updated: false,
       };
 
     default:
