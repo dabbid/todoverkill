@@ -1,1 +1,1 @@
-<todo-detail-form *ngIf="isLoaded" [data]="todo | async" [mode]="mode"></todo-detail-form>
+<todo-detail-form *ngIf="isLoaded || mode === 'creation'" [data]="todo | async" [mode]="mode"></todo-detail-form>
