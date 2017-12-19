@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -13,27 +13,28 @@ import { BusyService } from './shared/services/busy.service';
 
 export class AppComponent implements OnDestroy, OnInit {
 
-  isBusy:boolean = false;
-  shouldDisplayBackButton:boolean = false;
-  sub:Subscription;
+  public isBusy:boolean = false;
+  public shouldDisplayBackButton:boolean = false;
+
+  private subBusy:Subscription;
+  private subRouter:Subscription;
 
   constructor(private router:Router, private busyService:BusyService) {
-    router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd ) {
+    this.subRouter = router.events.subscribe((event:RouterEvent) => {
+      if (event instanceof NavigationEnd) {
         this.shouldDisplayBackButton = !router.isActive('/todos', true);
       }
     });
   }
 
   public ngOnInit() {
-    console.log('SUBSCRIBED');
-    this.sub = this.busyService.get().subscribe((value) => {
-      console.log('BUSY', value);
+    this.subBusy = this.busyService.get().subscribe((value:boolean) => {
       this.isBusy = value;
     });
   }
 
   public ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.subRouter.unsubscribe();
+    this.subBusy.unsubscribe();
   }
 }
