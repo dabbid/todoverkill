@@ -13,6 +13,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -29,6 +30,7 @@ import { DetailComponent } from './detail/detail.component';
 import { DetailFormComponent } from './detail/detail-form.component';
 import { ListComponent } from './list/list.component';
 // services
+import { BusyService } from './shared/services/busy.service';
 import { TodosEffects } from './shared/effects/todos.effects';
 // reducers
 import todoReducer from './shared/reducers/todo.reducer';
@@ -64,6 +66,7 @@ const appRoutes: Routes = [
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatProgressBarModule,
     MatProgressSpinnerModule,
     MatSelectModule,
     MatSnackBarModule,
@@ -74,8 +77,8 @@ const appRoutes: Routes = [
     StoreModule.forRoot({ todo: todoReducer, todos: todosReducer }),
     StoreDevtoolsModule.instrument(),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [BusyService],
+  bootstrap: [AppComponent],
 })
 
 export class AppModule { }

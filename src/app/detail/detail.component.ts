@@ -5,6 +5,7 @@ import { Observer } from 'rxjs/Observer';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 
+import { BusyService } from '../shared/services/busy.service';
 import Todo from '../shared/models/todo.model';
 import { LoadTodoAction } from '../shared/actions/todo.actions';
 
@@ -14,32 +15,39 @@ import { LoadTodoAction } from '../shared/actions/todo.actions';
   styleUrls: ['./detail.component.scss']
 })
 
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnDestroy {
 
   public todo:Observable<Todo>;
-  public isLoading:Observable<boolean>;
-  public isLoaded:Observable<boolean>;
-  public mode:string;
+  public isLoaded:boolean = false;
+  public mode:string = 'creation';
 
   private routeSnapshot:ActivatedRouteSnapshot;
-  private sub:Subscription;
+  private subLoaded:Subscription;
 
-  constructor(private route:ActivatedRoute, private store:Store<any>) {
-    this.routeSnapshot = this.route.snapshot;
-    this.mode = 'creation';
-    this.isLoaded = Observable.create((observer:Observer<boolean>) => observer.next(false));
-    this.isLoaded = Observable.create((observer:Observer<boolean>) => observer.next(true));
+  constructor(private route:ActivatedRoute, private store:Store<any>, private busyService:BusyService) {
     this.todo = store.select('todo').select('data');
-    if (typeof route.snapshot.params.id === 'string') {
+    this.routeSnapshot = route.snapshot;
+    if (typeof this.routeSnapshot.params.id === 'string') {
       this.mode = 'edition';
-      this.isLoading = store.select('todo').select('loading');
-      this.isLoaded = store.select('todo').select('loaded');
+      this.subLoaded = store.select('todo').select('loaded').subscribe((value:boolean) => {
+        this.isLoaded = value;
+        if (this.isLoaded) {
+          this.busyService.set(false);
+        }
+      });
     }
   }
 
   public ngOnInit() {
     if (this.mode === 'edition') {
+      this.busyService.set(true);
       this.store.dispatch(new LoadTodoAction(this.routeSnapshot.params.id));
+    }
+  }
+
+  public ngOnDestroy() {
+    if (this.mode === 'edition') {
+      this.subLoaded.unsubscribe();
     }
   }
 }

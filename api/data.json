@@ -13,7 +13,7 @@
     "description": "Integer congue dui non justo sollicitudin euismod. Nam urna quam, fermentum euismod pellentesque ac, hendrerit non ipsum.",
     "id": 1,
     "title": "Curabitur vitae velit lacus",
-    "modified_at": "2017-12-18T22:44:27.802Z"
+    "modified_at": "2017-12-19T22:18:02.722Z"
   },
   {
     "completed": true,
@@ -24,12 +24,12 @@
     "modified_at": "2017-12-18T23:42:11.885Z"
   },
   {
-    "completed": false,
+    "completed": true,
     "created_at": "2017-07-26T15:42:07.763Z",
     "description": "Une description de ouf pour mon méga todo",
     "id": 3,
     "title": "Mon méga todo",
-    "modified_at": "2017-12-19T13:24:45.645Z"
+    "modified_at": "2017-12-19T22:18:08.266Z"
   },
   {
     "completed": false,

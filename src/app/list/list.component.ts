@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs/Subscription';
 
+import { BusyService } from '../shared/services/busy.service';
 import { LoadTodosAction } from '../shared/actions/todos.actions';
 import { UpdateTodoAction, ResetTodoStateAction } from '../shared/actions/todo.actions';
 import Todo from '../shared/models/todo.model';
@@ -14,14 +16,19 @@ import Todo from '../shared/models/todo.model';
 export class ListComponent implements OnInit, OnDestroy {
 
   public todos:Array<Todo>;
-  public isLoading:Observable<boolean>;
-  public isLoaded:Observable<boolean>;
+  public isLoaded:boolean = false;
 
-  constructor(private store:Store<any>) {
-    this.isLoading = store.select('todos').select('loading');
-    this.isLoaded = store.select('todos').select('loaded');
-    const todos = store.select('todos').select('list');
-    todos.subscribe((list:Array<Todo>) => {
+  private subLoaded:Subscription;
+  private subTodos:Subscription;
+
+  constructor(private store:Store<any>, private busyService:BusyService) {
+    this.subLoaded = store.select('todos').select('loaded').subscribe((value:boolean) => {
+      this.isLoaded = value;
+      if (this.isLoaded) {
+        this.busyService.set(false);
+      }
+    });
+    this.subTodos = store.select('todos').select('list').subscribe((list:Array<Todo>) => {
       const completedTodos:Array<Todo> = [];
       const pendingTodos:Array<Todo> = [];
       list
@@ -38,11 +45,14 @@ export class ListComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
+  public ngOnInit() {
+    this.busyService.set(true);
     this.store.dispatch(new LoadTodosAction());
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
+    this.subLoaded.unsubscribe();
+    this.subTodos.unsubscribe();
     this.store.dispatch(new ResetTodoStateAction());
   }
 

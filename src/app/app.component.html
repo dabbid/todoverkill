@@ -1,12 +1,18 @@
-<mat-toolbar role="header">
-  <div class="main-header text-center" >
-    <a *ngIf="shouldDisplayBackButton" class="main-header-back-btn" mat-icon-button routerLink="/todos">
-      <mat-icon>chevron_left</mat-icon>
-    </a>
-    TODOVERKILL
+<header>
+  <mat-toolbar role="header">
+    <div class="main-header text-center" >
+      <a *ngIf="shouldDisplayBackButton" class="main-header-back-btn" mat-icon-button routerLink="/todos">
+        <mat-icon>chevron_left</mat-icon>
+      </a>
+      TODOVERKILL
+    </div>
+  </mat-toolbar>
+</header>
+<main class="main">
+  <div class="main-progress-bar" [hidden]="!isBusy">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
-</mat-toolbar>
-
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+  <div class="container pv-m">
+    <router-outlet></router-outlet>
+  </div>
+</main>

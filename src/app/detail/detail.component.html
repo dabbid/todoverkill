@@ -1,4 +1,1 @@
-<div>
-  <mat-spinner *ngIf="(isLoading | async) === true" color="primary"></mat-spinner>
-  <todo-detail-form *ngIf="(isLoaded | async) === true" [data]="todo | async" [mode]="mode"></todo-detail-form >
-</div>
+<todo-detail-form *ngIf="isLoaded" [data]="todo | async" [mode]="mode"></todo-detail-form>
