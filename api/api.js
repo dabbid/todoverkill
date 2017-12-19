@@ -3,8 +3,7 @@ var jsonfile = require('jsonfile');
 var router = express.Router();
 
 var dataFilePath = './api/data.json';
-
-var uid = 4;
+var fileFormat = { spaces: 2, EOL: '\r\n' };
 
 router.get('/todos', function(req, res, next) {
   jsonfile.readFile(dataFilePath, function(err, json) {
@@ -26,14 +25,21 @@ router.get('/todos/:id', function(req, res, next) {
 });
 
 router.post('/todos', function(req, res, next) {
-  const todo = Object.assign({
-    created_at: new Date().toISOString(),
-    id: uid++,
-  }, req.body);
-  jsonfile.writeFile(dataFilePath, todo, { flag: 'a' }, function(err) {
+  jsonfile.readFile(dataFilePath, function(err, todos) {
     if (!err) {
-      res.send(todo);
-      console.log(`New todo created: ${JSON.stringify(todo, null, 2)}`);
+      const todo = Object.assign({
+        completed: false,
+        created_at: new Date().toISOString(),
+        id: todos.length,
+      }, req.body);
+      console.log('req.body', req.body)
+      todos.push(todo)
+      jsonfile.writeFile(dataFilePath, todos, fileFormat, function(err) {
+        if (!err) {
+          res.send(todo);
+          console.log(`New todo created: ${JSON.stringify(todo, null, 2)}`);
+        }
+      });
     }
   });
 });
@@ -53,7 +59,7 @@ router.put('/todos/:id', function(req, res, next) {
         if (requestedTodo) {
           requestedTodo = Object.assign(requestedTodo, req.body, { modified_at: new Date().toISOString() });
           todos[requestedTodoIndex] = requestedTodo;
-          jsonfile.writeFile(dataFilePath, todos, function(err) {
+          jsonfile.writeFile(dataFilePath, todos, fileFormat, function(err) {
             if (!err) {
               res.send(requestedTodo);
               console.log(`Todo #${requestedTodo.id} updated:\n${JSON.stringify(requestedTodo, null, 2)}`);

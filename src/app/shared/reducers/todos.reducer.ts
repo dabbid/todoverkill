@@ -1,4 +1,4 @@
-import { TODOS_LOADED, TODOS_LOADING } from '../actions/todos.types';
+import { TODOS_LOADED, TODOS_LOAD } from '../actions/todos.types';
 import { TODO_UPDATED } from '../actions/todo.types';
 import * as actions from '../actions/todos.actions';
 import { TodoUpdatedAction } from '../actions/todo.actions';
@@ -15,7 +15,7 @@ const initialState = {
 
 export default function listReducer(state = initialState, action: Action) {
   switch (action.type) {
-    case TODOS_LOADING:
+    case TODOS_LOAD:
       return {
         ...state,
         error: {},

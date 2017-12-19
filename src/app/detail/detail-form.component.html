@@ -1,22 +1,23 @@
 <form [formGroup]="form">
+  <h1>{{ mode === 'creation' ? 'Add new Todo' : 'Edit Todo' }}</h1>
   <mat-form-field class="field">
     <input
-      [(ngModel)]="data.title"
-      (blur)="onBlur('title')"
       class="field-title"
       formControlName="title"
       matInput
       placeholder="Title"
       required
+      [(ngModel)]="data.title"
+      (blur)="onBlur('title')"
     >
   </mat-form-field>
-  <ul class="list-reset mv-m">
+  <ul *ngIf="mode === 'edition'" class="list-reset mv-m">
     <li>Created on {{data.created_at | date}}</li>
     <li *ngIf="data.modified_at">Modified on {{data.modified_at | date}}</li>
     <li>
       Status:
       <mat-form-field class="ml-xs">
-        <mat-select [(ngModel)]="data.completed" (change)="onStateChange()" formControlName="state" required>
+        <mat-select formControlName="state" placeholder="Choose a state" required [(ngModel)]="data.completed" (change)="onStateChange()">
           <mat-option [value]="false">Pending</mat-option>
           <mat-option [value]="true">Completed</mat-option>
         </mat-select>
@@ -25,11 +26,14 @@
   </ul>
   <mat-form-field class="field">
     <textarea
-      [(ngModel)]="data.description"
-      (blur)="onBlur('description')"
       formControlName="description"
       matInput
       placeholder="Description"
+      [(ngModel)]="data.description"
+      (blur)="onBlur('description')"
     ></textarea>
   </mat-form-field>
+  <div class="text-right mb-m" *ngIf="mode === 'creation'">
+    <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" >Submit</button>
+  </div>
 </form>

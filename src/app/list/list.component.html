@@ -2,7 +2,7 @@
   <mat-spinner *ngIf="(isLoading | async) === true" color="primary"></mat-spinner>
   <mat-grid-list *ngIf="(isLoaded | async) === true" cols="3" rowHeight="4:3">
     <mat-grid-tile>
-      <button mat-fab>
+      <button mat-fab routerLink="/todo/create">
         <mat-icon aria-label="Add a todo">add</mat-icon>
       </button>
     </mat-grid-tile>

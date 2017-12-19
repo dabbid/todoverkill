@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import { LoadTodosAction } from '../shared/actions/todos.actions';
-import { UpdateTodoAction, ResetTodoUpdatedStateAction } from '../shared/actions/todo.actions';
+import { UpdateTodoAction, ResetTodoStateAction } from '../shared/actions/todo.actions';
 import Todo from '../shared/models/todo.model';
 
 @Component({
@@ -43,7 +43,7 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new ResetTodoUpdatedStateAction());
+    this.store.dispatch(new ResetTodoStateAction());
   }
 
   public onTodoStateChange(id:number, state:boolean):void {

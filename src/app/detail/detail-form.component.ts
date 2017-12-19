@@ -1,10 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { Router } from "@angular/router";
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 
-import { UpdateTodoAction, ResetTodoUpdatedStateAction } from '../shared/actions/todo.actions';
+import { CreateTodoAction, UpdateTodoAction, ResetTodoStateAction } from '../shared/actions/todo.actions';
 import Todo from '../shared/models/todo.model';
 
 @Component({
@@ -14,36 +15,59 @@ import Todo from '../shared/models/todo.model';
 })
 export class DetailFormComponent implements OnInit, OnDestroy {
 
-  @Input() data:Todo
+  @Input() mode:string;
+  @Input() data:Todo;
 
-  form:FormGroup;
-  updatedSub:Subscription;
+  public form:FormGroup;
 
-  constructor(private store:Store<any>, public snackBar: MatSnackBar) {}
+  private createdSub:Subscription;
+  private updatedSub:Subscription;
 
-  ngOnInit() {
+  constructor(private router:Router, private store:Store<any>, public snackBar: MatSnackBar) {}
+
+  public ngOnInit() {
     this.initForm();
+    this.createdSub = this.store.select('todo').select('created').subscribe((value:boolean) => {
+      if (value === true) {
+        this.snackBar.open(`New todo "${this.data.title}" has been created`, 'OK', { duration: 5000 });
+        this.initForm();
+        this.router.navigate(['/todos']);
+      }
+    });
     this.updatedSub = this.store.select('todo').select('updated').subscribe((value:boolean) => {
       if (value === true) {
-        this.snackBar.open('Your todo has been updated!', 'OK', { duration: 5000 });
+        this.snackBar.open(`Your todo "${this.data.title}" has been updated!`, 'OK', { duration: 5000 });
         this.initForm();
       }
     });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
+    this.createdSub.unsubscribe();
     this.updatedSub.unsubscribe();
-    this.store.dispatch(new ResetTodoUpdatedStateAction());
+    this.store.dispatch(new ResetTodoStateAction());
   }
 
   public onBlur(name:string) {
-    if (this.form.controls[name].dirty && this.form.controls[name].valid) {
+    if (this.mode === 'edition' && this.form.controls[name].dirty && this.form.controls[name].valid) {
       this.updateTodoProperty(name);
     }
   }
 
   public onStateChange() {
-    this.updateTodoProperty('completed');
+    if (this.mode === 'edition') {
+      this.updateTodoProperty('completed');
+    }
+  }
+
+  public onSubmit() {
+    if (this.form.valid) {
+      if (this.mode === 'creation') {
+        this.store.dispatch(new CreateTodoAction(this.data));
+      } else {
+        this.store.dispatch(new UpdateTodoAction(this.data.id, this.data));
+      }
+    }
   }
 
   private initForm() {

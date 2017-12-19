@@ -1,4 +1,12 @@
-import { TODO_LOADED, TODO_LOADING, TODO_UPDATED, TODO_UPDATING, RESET_TODO_UPDATED_STATE } from '../actions/todo.types';
+import {
+  TODO_CREATE,
+  TODO_CREATED,
+  TODO_LOADED,
+  TODO_LOAD,
+  TODO_UPDATED,
+  TODO_UPDATE,
+  RESET_TODO_STATE,
+} from '../actions/todo.types';
 import * as actions from '../actions/todo.actions';
 
 export type Action = actions.All;
@@ -15,7 +23,10 @@ interface Todo {
 
 const initialState = {
   data: {},
-  loadingError: {},
+  createError: {},
+  creating: false,
+  created: false,
+  loadError: {},
   loading: false,
   loaded: false,
   updateError: {},
@@ -25,7 +36,23 @@ const initialState = {
 
 export default function detailReducer(state = initialState, action: Action) {
   switch (action.type) {
-    case TODO_LOADING:
+    case TODO_CREATE:
+      return {
+        ...state,
+        createError: {},
+        created: false,
+        creating: true,
+      };
+
+    case TODO_CREATED:
+      return {
+        ...state,
+        data: action.payload,
+        created: true,
+        creating: false,
+      };
+
+    case TODO_LOAD:
       return {
         ...state,
         loadingError: {},
@@ -41,7 +68,7 @@ export default function detailReducer(state = initialState, action: Action) {
         loading: false,
       };
 
-    case TODO_UPDATING:
+    case TODO_UPDATE:
       return {
         ...state,
         updateError: {},
@@ -61,10 +88,10 @@ export default function detailReducer(state = initialState, action: Action) {
         updating: false,
       };
 
-    case RESET_TODO_UPDATED_STATE:
+    case RESET_TODO_STATE:
       return {
         ...state,
-        updated: false,
+        ...initialState,
       };
 
     default:

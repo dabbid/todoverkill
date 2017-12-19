@@ -1,6 +1,7 @@
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Params } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -12,27 +13,33 @@ import { LoadTodoAction } from '../shared/actions/todo.actions';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
-export class DetailComponent implements OnDestroy, OnInit {
+
+export class DetailComponent implements OnInit {
 
   public todo:Observable<Todo>;
   public isLoading:Observable<boolean>;
   public isLoaded:Observable<boolean>;
+  public mode:string;
 
+  private routeSnapshot:ActivatedRouteSnapshot;
   private sub:Subscription;
 
   constructor(private route:ActivatedRoute, private store:Store<any>) {
-    this.isLoading = store.select('todo').select('loading');
-    this.isLoaded = store.select('todo').select('loaded');
+    this.routeSnapshot = this.route.snapshot;
+    this.mode = 'creation';
+    this.isLoaded = Observable.create((observer:Observer<boolean>) => observer.next(false));
+    this.isLoaded = Observable.create((observer:Observer<boolean>) => observer.next(true));
     this.todo = store.select('todo').select('data');
+    if (typeof route.snapshot.params.id === 'string') {
+      this.mode = 'edition';
+      this.isLoading = store.select('todo').select('loading');
+      this.isLoaded = store.select('todo').select('loaded');
+    }
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
-
-  ngOnInit() {
-    this.sub = this.route.params.subscribe((params:Params) => {
-      this.store.dispatch(new LoadTodoAction(params.id));
-    });
+  public ngOnInit() {
+    if (this.mode === 'edition') {
+      this.store.dispatch(new LoadTodoAction(this.routeSnapshot.params.id));
+    }
   }
 }

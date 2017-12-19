@@ -38,6 +38,7 @@ const appRoutes: Routes = [
   { path: '',   redirectTo: '/todos', pathMatch: 'full' },
   { path: 'todos', component: ListComponent },
   { path: 'todos/:id', component: DetailComponent },
+  { path: 'todo/create', component: DetailComponent },
   // { path: '**', component: PageNotFoundComponent },
 ];
 
