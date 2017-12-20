@@ -5,11 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.config.json",
-    "api": "node ./bin/www --port 3000",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "gh-deploy": "ng build --prod --env=prod --base-href https://dabbid.github.io/todoverkill/ && ngh"
   },
   "private": true,
   "dependencies": {
@@ -27,11 +27,7 @@
     "@ngrx/effects": "^4.1.1",
     "@ngrx/store": "^4.1.1",
     "@ngrx/store-devtools": "^4.1.1",
-    "body-parser": "^1.18.2",
     "core-js": "^2.4.1",
-    "express": "^4.16.2",
-    "jsonfile": "^4.0.0",
-    "morgan": "^1.9.0",
     "normalize.css": "^7.0.0",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
