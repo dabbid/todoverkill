@@ -37,7 +37,6 @@ export class ListComponent implements OnInit, OnDestroy {
         .forEach((todo:Todo) => {
           if (todo.completed) {
             completedTodos.push(todo);
-            console.log('completedTodos', completedTodos);
           } else {
             pendingTodos.push(todo);
           }
