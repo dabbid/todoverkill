@@ -34,8 +34,8 @@ import { ListItemComponent } from './list/list-item.component';
 import { BusyService } from './shared/services/busy.service';
 import { TodosEffects } from './shared/effects/todos.effects';
 // reducers
-import todoReducer from './shared/reducers/todo.reducer';
-import todosReducer from './shared/reducers/todos.reducer';
+import { todoReducer } from './shared/reducers/todo.reducer';
+import { todosReducer } from './shared/reducers/todos.reducer';
 
 const appRoutes: Routes = [
   { path: '',   redirectTo: '/todos', pathMatch: 'full' },

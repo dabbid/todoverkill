@@ -34,7 +34,7 @@ const initialState = {
   updated: false,
 };
 
-export default function detailReducer(state = initialState, action: Action) {
+export function todoReducer(state = initialState, action: Action) {
   switch (action.type) {
     case TODO_CREATE:
       return {

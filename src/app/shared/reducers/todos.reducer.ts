@@ -13,7 +13,7 @@ const initialState = {
   loaded: false,
 };
 
-export default function listReducer(state = initialState, action: Action) {
+export function todosReducer(state = initialState, action: Action) {
   switch (action.type) {
     case TODOS_LOAD:
       return {
