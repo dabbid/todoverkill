@@ -1,7 +1,17 @@
 @import '~sass/variables';
 @import '~sass/mixins';
 
+$main-header-height: 64px;
+$progress-bar-height: 5px;
+
 .main-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+
+.main-header-content {
   position: relative;
   width: 100%;
 }
@@ -9,4 +19,16 @@
 .main-header-back-btn {
   @include absolute-center(0, auto, 0, 0);
   position: absolute;
+}
+
+.main {
+  padding-top: $main-header-height + $progress-bar-height;
+  position: relative;
+}
+
+.main-progress-bar {
+  left: 0;
+  position: absolute;
+  top: $main-header-height;
+  width: 100%;
 }

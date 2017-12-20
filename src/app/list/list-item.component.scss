@@ -9,12 +9,13 @@
   &:hover {
     box-shadow: 0 4px 8px rgba($color-black, .15);
   }
+}
 
+.todo-list-item-completed {
   &::before,
   &::after {
     background-color: $color-grey;
     content: '';
-    display: none;
     height: 100%;
     left: 0;
     margin: auto;
@@ -33,14 +34,8 @@
   }
 }
 
-.todo-list-item-completed::before,
-.todo-list-item-completed::after {
-  animation: fade-in $animation-duration-dflt $ease-dflt forwards;
-  display: block;
-}
-
 .todo-list-item-changed {
- animation: fade-out .3s $ease-dflt forwards;
+  animation: fade-out $animation-duration-dflt $ease-dflt forwards;
 }
 
 .todo-list-item-actions {

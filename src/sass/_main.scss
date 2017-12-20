@@ -42,15 +42,3 @@ h4,
 .h4-like { font-size: 1.25rem; }
 
 hr { border-bottom-color: $color-grey; }
-
-.main {
-  padding-top: 5px;
-  position: relative;
-}
-
-.main-progress-bar {
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
