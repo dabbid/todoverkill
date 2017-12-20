@@ -3,12 +3,14 @@ $ease-dflt: cubic-bezier(.4, 0, .2, 1);
 $animation-duration-dflt: .3s;
 
 // COLORS
-$color-white:      #fff;
-$color-black:      #333;
+$color-white: #fff;
+$color-grey:  #a0a0a0;
+$color-black: #333;
 
 $colors: (
-  'white':      $color-white,
-  'black':      $color-black,
+  'white': $color-white,
+  'grey':  $color-grey,
+  'black': $color-black,
 );
 
 // CONTAINER SIZES

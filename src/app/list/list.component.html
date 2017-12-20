@@ -1,23 +1,21 @@
+<h1>Todo List</h1>
+<h2>Pending</h2>
+<p *ngIf="isLoaded && pendingTodos.length === 0">No pending todo to display</p>
 <mat-grid-list *ngIf="isLoaded" cols="3" rowHeight="4:3">
   <mat-grid-tile>
     <button mat-fab routerLink="/todo/create">
       <mat-icon aria-label="Add a todo">add</mat-icon>
     </button>
   </mat-grid-tile>
-  <mat-grid-tile *ngFor="let todo of todos">
-    <mat-card class="todo">
-      <mat-card-header>
-        <mat-card-title>
-          {{todo.created_at | date: 'dd/MM/yyyy HH:mm:SS'}}<br>
-          <span [ngClass]="{ 'text-stroke': todo.completed }">{{todo.title}}</span>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-actions>
-        <mat-checkbox (change)="onTodoStateChange(todo.id, !todo.completed)" [checked]="todo.completed">
-          Mark as done
-        </mat-checkbox>
-        <a mat-button [routerLink]="['/todos', todo.id]"><mat-icon>assignment</mat-icon>View details</a>
-      </mat-card-actions>
-    </mat-card>
+  <mat-grid-tile *ngFor="let todo of pendingTodos">
+    <list-item class="list-item" [data]="todo"></list-item>
+  </mat-grid-tile>
+</mat-grid-list>
+<hr>
+<h2>Completed</h2>
+<p *ngIf="isLoaded && completedTodos.length === 0">No completed todo to display</p>
+<mat-grid-list *ngIf="isLoaded" cols="3" rowHeight="4:3">
+  <mat-grid-tile *ngFor="let todo of completedTodos">
+    <list-item class="list-item" [data]="todo"></list-item>
   </mat-grid-tile>
 </mat-grid-list>

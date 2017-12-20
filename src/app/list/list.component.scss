@@ -1,0 +1,13 @@
+@import '~sass/variables';
+@import '~sass/animations';
+
+.list-item {
+  animation: slide-in-up $animation-duration-dflt $ease-dflt forwards;
+  opacity: 0;
+}
+
+@for $i from 1 through 10 {
+  .list-item:nth-child(#{$i}) {
+    animation-delay: .1s * $i;
+  }
+}

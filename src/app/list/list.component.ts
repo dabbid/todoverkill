@@ -11,11 +11,12 @@ import Todo from '../shared/models/todo.model';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit, OnDestroy {
 
-  public todos:Array<Todo>;
+  public completedTodos:Array<Todo>;
+  public pendingTodos:Array<Todo>;
   public isLoaded:boolean = false;
 
   private subLoaded:Subscription;
@@ -36,12 +37,14 @@ export class ListComponent implements OnInit, OnDestroy {
         .forEach((todo:Todo) => {
           if (todo.completed) {
             completedTodos.push(todo);
+            console.log('completedTodos', completedTodos);
           } else {
             pendingTodos.push(todo);
           }
         })
       ;
-      this.todos = pendingTodos.concat(completedTodos.reverse());
+      this.pendingTodos = pendingTodos;
+      this.completedTodos = completedTodos.reverse();
     });
   }
 

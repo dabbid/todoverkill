@@ -29,6 +29,7 @@ import { AppComponent } from './app.component';
 import { DetailComponent } from './detail/detail.component';
 import { DetailFormComponent } from './detail/detail-form.component';
 import { ListComponent } from './list/list.component';
+import { ListItemComponent } from './list/list-item.component';
 // services
 import { BusyService } from './shared/services/busy.service';
 import { TodosEffects } from './shared/effects/todos.effects';
@@ -47,9 +48,10 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponent,
     DetailComponent,
     DetailFormComponent,
+    ListComponent,
+    ListItemComponent,
   ],
   imports: [
     BrowserAnimationsModule,

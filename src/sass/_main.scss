@@ -26,20 +26,22 @@ h4,
 .h3-like,
 .h4-like {
   font-family: $font-title;
+  font-weight: 700;
 }
 
 h1,
 .h1-like { font-size: 2rem; }
 
 h2,
-.h2-like { font-size: 1.375rem; }
+.h2-like { font-size: 1.5rem; }
 
 h3,
-.h3-like { font-size: 1.25rem; }
+.h3-like { font-size: 1.375rem; }
 
 h4,
-.h4-like { font-size: 1.125rem; }
+.h4-like { font-size: 1.25rem; }
 
+hr { border-bottom-color: $color-grey; }
 
 .main {
   padding-top: 5px;
