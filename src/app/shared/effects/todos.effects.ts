@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
+import { environment } from '../../../environments/environment';
 import { TODO_CREATE, TODO_LOAD, TODO_UPDATE } from '../actions/todo.types';
 import { TODOS_LOAD } from '../actions/todos.types';
 import {
@@ -29,7 +30,10 @@ export class TodosEffects {
   loadTodos$:Observable<Action> = this.actions$
     .ofType(TODOS_LOAD)
     .mergeMap(() => new Promise((resolve) => {
-      this.http.get('/api/todos').subscribe((todos:Array<Todo>) => resolve(new TodosLoadedAction(todos)))
+      this.http
+        .get(environment.apiUrl + '/api/todos')
+        .subscribe((todos:Array<Todo>) => resolve(new TodosLoadedAction(todos)))
+      ;
     }))
   ;
 
@@ -38,7 +42,10 @@ export class TodosEffects {
   createTodo$:Observable<Action> = this.actions$
     .ofType(TODO_CREATE)
     .mergeMap((action:CreateTodoAction) => new Promise((resolve) => {
-      this.http.post('/api/todos', action.payload).subscribe((todo:Todo) => resolve(new TodoCreatedAction(todo)))
+      this.http
+        .post(environment.apiUrl + '/api/todos', action.payload)
+        .subscribe((todo:Todo) => resolve(new TodoCreatedAction(todo)))
+      ;
     }))
   ;
 
@@ -47,7 +54,10 @@ export class TodosEffects {
   loadTodo$:Observable<Action> = this.actions$
     .ofType(TODO_LOAD)
     .mergeMap((action:LoadTodoAction) => new Promise((resolve) => {
-      this.http.get(`/api/todos/${action.id}`).subscribe((todo:Todo) => resolve(new TodoLoadedAction(todo)))
+      this.http
+        .get(environment.apiUrl + `/api/todos/${action.id}`)
+        .subscribe((todo:Todo) => resolve(new TodoLoadedAction(todo)))
+      ;
     }))
   ;
 
@@ -56,7 +66,10 @@ export class TodosEffects {
   updateTodo$:Observable<Action> = this.actions$
     .ofType(TODO_UPDATE)
     .mergeMap((action:UpdateTodoAction) => new Promise((resolve) => {
-      this.http.put(`/api/todos/${action.id}`, action.payload).subscribe((todo:Todo) => resolve(new TodoUpdatedAction(todo)))
+      this.http
+        .put(environment.apiUrl + `/api/todos/${action.id}`, action.payload)
+        .subscribe((todo:Todo) => resolve(new TodoUpdatedAction(todo)))
+      ;
     }))
   ;
 
