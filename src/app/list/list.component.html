@@ -1,21 +1,21 @@
 <h1>Todo List</h1>
 <h2>Pending</h2>
 <p *ngIf="isLoaded && pendingTodos.length === 0">No pending todo to display</p>
-<mat-grid-list *ngIf="isLoaded" cols="3" rowHeight="4:3">
-  <mat-grid-tile>
+<div class="grid-1 grid-2-tablet-portrait grid-3-laptop grid-cells-vcenter" *ngIf="isLoaded">
+  <div class="text-center mb-m">
     <button mat-fab routerLink="/todo/create">
       <mat-icon aria-label="Add a todo">add</mat-icon>
     </button>
-  </mat-grid-tile>
-  <mat-grid-tile *ngFor="let todo of pendingTodos">
+  </div>
+  <div class="list-item mb-m" *ngFor="let todo of pendingTodos">
     <list-item class="list-item" [data]="todo"></list-item>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</div>
 <hr>
 <h2>Completed</h2>
 <p *ngIf="isLoaded && completedTodos.length === 0">No completed todo to display</p>
-<mat-grid-list *ngIf="isLoaded" cols="3" rowHeight="4:3">
-  <mat-grid-tile *ngFor="let todo of completedTodos">
+<div class="grid-1 grid-2-tablet-portrait grid-3-laptop grid-cells-vcenter" *ngIf="isLoaded">
+  <div class="list-item mb-m" *ngFor="let todo of completedTodos">
     <list-item class="list-item" [data]="todo"></list-item>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</div>

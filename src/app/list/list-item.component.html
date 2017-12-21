@@ -1,10 +1,10 @@
 <div class="todo-list-item pa-ms" [ngClass]="{ 'todo-list-item-completed': data.completed, 'todo-list-item-changed': changed }">
   <div class="text-color-grey font-size-s">{{data.created_at | date: 'dd/MM/yyyy'}}</div>
-  <div class="h4-like mv-ms text-center">{{data.title}}</div>
+  <div class="h3-like mv-ms text-center">{{data.title}}</div>
   <div class="todo-list-item-actions">
     <div class="pr-s">
       <mat-checkbox (change)="onTodoStateChange(data.id, !data.completed)" [checked]="data.completed">
-        Mark as done
+        Completed
       </mat-checkbox>
     </div>
     <div class="pl-s">

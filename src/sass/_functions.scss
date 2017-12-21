@@ -1,0 +1,33 @@
+@function pow($x, $n) {
+  $ret: 1;
+  @if $n >= 0 {
+    @for $i from 1 through $n {
+      $ret: $ret * $x;
+    }
+  } @else {
+    @for $i from $n to 0 {
+      $ret: $ret / $x;
+    }
+  }
+  @return $ret;
+}
+
+@function rem2px($rem) {
+  @return strip-unit(round($rem * 16)) * 1px;
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+@function to-fixed($float, $digits: 2) {
+  $sass-precision: 5;
+  @if $digits > $sass-precision {
+    $digits: 5;
+  }
+  $pow: pow(10, $digits);
+  @return round($float * $pow) / $pow;
+}

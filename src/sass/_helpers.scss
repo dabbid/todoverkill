@@ -1,22 +1,11 @@
 // ALIGNMENT
-.absolute-center {
-  @include absolute-center;
-}
+.absolute-center { @include absolute-center; }
 
-.absolute-center-tr {
-  @include absolute-center-tr;
-}
+.absolute-center-tr { @include absolute-center-tr; }
 
-.hcenter {
-  @include hcenter;
-}
+.hcenter { @include hcenter; }
 
-.vcenter-child {
-  @include vcenter-child;
-}
-
-.float-left { float: left; }
-.float-right { float: right; }
+.vcenter-child { @include vcenter-child; }
 
 // BORDERS
 .bordered { border: 1px solid; }
@@ -32,12 +21,6 @@
 .bordered-v {
   border-bottom: 1px solid;
   border-top: 1px solid;
-}
-
-// BORDERS RADIUS
-@for $i from 1 through 10 {
-  .border-radius-#{$i},
-  .bradius-#{$i} { border-radius: 1px * $i; }
 }
 
 // BUSY
@@ -67,9 +50,7 @@
 }
 
 // CLEARFIX
-.clearfix {
-  @include clearfix;
-}
+.clearfix { @include clearfix; }
 
 // COLORS (background, border, text)
 @each $key, $value in $colors {
@@ -79,35 +60,10 @@
 }
 
 // CONTAINER
-.container {
-  @include container;
-}
+.container { @include container; }
 
-// DISPLAY
-.block { display: block; }
-.flex { display: flex; }
-.inline { display: inline; }
-.inline-block { display: inline-block; }
-
-.hide {
-  display: none !important;
-}
-
-@each $key, $value in $screen-sizes {
-  @each $display in $displays {
-    @media screen and (min-width: #{$value}) {
-      .#{$display}-#{$key} { display: #{$display} !important; }
-    }
-  }
-}
-
-.visually-hidden {
-  @include visually-hidden;
-}
-
-// FONT FAMILIES
-.font-text { font-family: $font-text; }
-.font-title { font-family: $font-title; }
+// DISPLAYS
+.visually-hidden { @include visually-hidden; }
 
 // FONT SIZES
 @each $key, $value in $font-sizes {
@@ -116,21 +72,14 @@
   }
 }
 
-// FONT STYLES
-.font-italic { font-style: italic; }
-.font-norm { font-style: normal; }
-
 // LIST
-.list-reset {
-  @include list-reset;
-}
+.list-reset { @include list-reset; }
 
-.list-plain {
-  @include list-plain;
-}
+.list-plain { @include list-plain; }
 
 .list-plain-auto {
   @include list-plain;
+
   li {
     flex-grow: 0;
   }
@@ -219,70 +168,3 @@ $paddings: (
 .text-left { text-align: left; }
 .text-center { text-align: center; }
 .text-right { text-align: right; }
-
-.uc,
-.uppercase { text-transform: uppercase; }
-
-.ucfirst::first-letter,
-.upperfirst::first-letter { text-transform: uppercase; }
-
-.text-ellipsis,
-.text-overflow {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.text-no-decoration { text-decoration: none; }
-.text-stroke { text-decoration: line-through; }
-.text-underline { text-decoration: underline; }
-
-// line clamp
-$line-clamp-max: 10;
-
-[class*="line-clamp"] {
-  overflow: hidden;
-  position: relative;
-
-  &::after {
-    box-shadow: -8rem 0 4rem -4rem $color-white inset; // prefer box-shadow over gradient as box-shadow can be animated
-    bottom: 0;
-    content: '';
-    height: $lh-dflt * 1rem;
-    position: absolute;
-    right: 0;
-    width: 8rem;
-  }
-}
-
-@for $i from 1 through $line-clamp-max {
-  .line-clamp-#{$i} {
-    height: $lh-dflt * $i * 1em;
-  }
-}
-
-@each $key, $value in $screen-sizes {
-  @media screen and (min-width: $value) {
-    @for $i from 1 through $line-clamp-max {
-      .line-clamp-#{$i}-#{$key} {
-        height: $lh-dflt * $i * 1em;
-      }
-    }
-  }
-}
-
-// VIDEO
-.video-wrapper {
-  height: 0;
-  padding-bottom: 56.25%;
-  padding-top: 25px;
-  position: relative;
-
-  iframe {
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
-}

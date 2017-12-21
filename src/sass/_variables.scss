@@ -16,14 +16,13 @@ $colors: (
 // CONTAINER SIZES
 $container-width: 1140px;
 
-// DISPLAYS
-$displays: ('block', 'flex', 'inline', 'inline-block');
-
 // FONT FAMILY
+$font-title: 'Open Sans', Helvetica, sans-serif;
 $font-text:  'Open Sans', Helvetica, sans-serif;
-$font-title: 'Roboto Slab', Helvetica, sans-serif;
 
 // FONT SIZES
+$font-size-dflt:    14px;
+
 $font-xxl:          4rem;
 $font-xl:           3rem;
 $font-l:            2.25rem;
@@ -35,9 +34,6 @@ $font-sm:           .875rem;
 $font-s:            .75rem;
 $font-xs:           .625rem;
 $font-xxs:          .5rem;
-
-$font-size-desktop: 16px;
-$font-size-mobile:  14px;
 
 $font-sizes: (
   xxl: $font-xxl,
@@ -57,16 +53,9 @@ $font-sizes: (
 $font-weight-black:   900;
 $font-weight-bold:    700;
 $font-weight-medium:  500;
-$font-weight-med:     500;
-$font-weight-mid:     500;
 $font-weight-regular: 400;
-$font-weight-reg:     400;
 $font-weight-light:   300;
-$font-weight-lite:    300;
-$font-weight-thin:    300;
 $font-weight-xlight:  200;
-$font-weight-xlite:   200;
-$font-weight-xthin:   200;
 
 // LINE HEIGHTS
 $lh-dflt: 1.5;

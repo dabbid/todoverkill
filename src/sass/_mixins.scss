@@ -76,36 +76,3 @@
     flex-grow: 1;
   }
 }
-
-// SHAPES
-@mixin triangle-up($width, $height, $color) {
-  border-bottom: $height solid $color;
-  border-left: $width / 2 solid transparent;
-  border-right: $width / 2 solid transparent;
-  height: 0;
-  width: 0;
-}
-
-@mixin triangle-right($width, $height, $color) {
-  border-bottom: $height / 2 solid transparent;
-  border-left: $width solid $color;
-  border-top: $height / 2 solid transparent;
-  height: 0;
-  width: 0;
-}
-
-@mixin triangle-down($width, $height, $color) {
-  border-left: $width / 2 solid transparent;
-  border-right: $width / 2 solid transparent;
-  border-top: $height solid $color;
-  height: 0;
-  width: 0;
-}
-
-@mixin triangle-left($width, $height, $color) {
-  border-bottom: $height / 2 solid transparent;
-  border-right: $width solid $color;
-  border-top: $height / 2 solid transparent;
-  height: 0;
-  width: 0;
-}

@@ -8,6 +8,6 @@
 
 @for $i from 1 through 10 {
   .list-item:nth-child(#{$i}) {
-    animation-delay: .1s * $i;
+    animation-delay: .05s * $i;
   }
 }

@@ -1,0 +1,94 @@
+$grid-gutter-l: $space-l;
+$grid-gutter-m: $space-m;
+$grid-gutter: $space-sm;
+$grid-max-cols: 12;
+
+// grid
+[class*="grid"] {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -($grid-gutter);
+  margin-right: -($grid-gutter);
+
+  > * {
+    flex: 0 0 auto;
+    padding-left: $grid-gutter;
+    padding-right: $grid-gutter;
+  }
+}
+
+// gutter
+.grid-gutter-m {
+  margin-left: -($grid-gutter-m);
+  margin-right: -($grid-gutter-m);
+
+  > * {
+    padding-left: $grid-gutter-m;
+    padding-right: $grid-gutter-m;
+  }
+}
+
+.grid-gutter-l {
+  margin-left: -($grid-gutter-l);
+  margin-right: -($grid-gutter-l);
+
+  > * {
+    padding-left: $grid-gutter-l;
+    padding-right: $grid-gutter-l;
+  }
+}
+
+// grid & cells cols nb
+@for $i from 1 through $grid-max-cols {
+  .grid-#{$i} > * {
+    flex: 0 0 (to-fixed(100 / $i, 4) * 1%);
+  }
+
+  .cell-#{$i} {
+    flex: 0 0 (to-fixed($i / $grid-max-cols * 100, 4) * 1%);
+  }
+
+  .cell-order-#{$i} {
+    order: #{$i};
+  }
+}
+
+// grid & cells cols nb depending on screen width
+@each $key, $value in $screen-sizes {
+  @media screen and (min-width: $value) {
+    .cell-order-initial-#{$key} {
+      order: initial;
+    }
+
+    @for $i from 1 through $grid-max-cols {
+      .grid-#{$i}-#{$key} > * {
+        flex: 0 0 (to-fixed(100 / $i, 4) * 1%);
+      }
+
+      .cell-#{$i}-#{$key} {
+        flex: 0 0 (to-fixed($i / $grid-max-cols * 100, 4) * 1%);
+      }
+
+      .cell-order-#{$i}-#{$key} {
+        order: #{$i};
+      }
+    }
+  }
+}
+
+// grid alignment
+.grid-hcenter { align-content: center; }
+.grid-hend { align-content: flex-end; }
+.grid-hstart { align-content: flex-start; }
+
+.grid-vcenter { align-content: center; }
+.grid-vend { align-content: flex-end; }
+.grid-vstart { align-content: flex-start; }
+.grid-vstretch { align-content: stretch; }
+
+// cells alignment
+.grid-cells-vbaseline { align-items: baseline; }
+.grid-cells-vcenter { align-items: center; }
+.grid-cells-vend { align-items: flex-end; }
+.grid-cells-vstart { align-items: flex-start; }
+.grid-cells-vstretch { align-items: stretch; }
