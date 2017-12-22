@@ -42,7 +42,9 @@ export function todosReducer(state = initialState, action: Action) {
         }
         return false;
       });
-      list[updatedTodoIndex] = Object.assign({}, updatedTodo, action.payload);
+      if (updatedTodoIndex > -1) {
+        list[updatedTodoIndex] = Object.assign({}, updatedTodo, action.payload);
+      }
       return { ...state, list };
 
     default:
